@@ -5,7 +5,6 @@ importScripts(
   "https://www.gstatic.com/firebasejs/9.7.0/firebase-auth-compat.js"
 );
 
-const { firebaseConfig } = useRuntimeConfig();
 
 const app = firebase.initializeApp({
   apiKey: "AIzaSyCeU5j8VhI4djofAj7DGXeojqYcbytc5l0",
