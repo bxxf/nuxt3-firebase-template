@@ -14,7 +14,7 @@ export default defineNuxtPlugin(({ssrContext}) => {
   const { user } = useAuth();
   admin
     .auth()
-    .verifyIdToken(token)
+    .verifyIdToken(token.substring("Bearer ".length))
     // get properties from decoded id token
     .then(({ email }) => (user.value = { email }));
 });
