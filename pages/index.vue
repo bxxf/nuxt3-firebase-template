@@ -1,8 +1,13 @@
 <script lang="ts" setup>
-const { signInWithGoogle } = useAuth();
+const { signInWithGoogle, signOut, user } = useAuth();
 </script>
 
 <template>
-  <button @click="signInWithGoogle">Sign In With Google</button>
+  <div>
+    <div v-if="user">
+      Welcome back, {{ user?.email }} <button @click="signOut">Sign Out</button>
+    </div>
+    <button @click="signInWithGoogle" v-else>Sign In With Google</button>
+  </div>
 </template>
 

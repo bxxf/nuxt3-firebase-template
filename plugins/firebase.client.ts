@@ -1,16 +1,16 @@
-import { initializeApp, getApp } from "firebase/app";
+import { initializeApp, getApps } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { signInCallback } from "../utils/signInCallback";
 
 export default defineNuxtPlugin(({ provide }) => {
   const { firebaseConfig } = useRuntimeConfig();
 
-  const firebaseApp = getApp() ?? initializeApp(firebaseConfig);
+  const firebaseApp = getApps()[0] ?? initializeApp(firebaseConfig);
   const firebaseAuth = getAuth(firebaseApp);
 
-  const auth = useAuth();
-
   // set user on client when available
-  firebaseAuth.onAuthStateChanged((user) => (auth.user.value = user));
+  // @ts-ignore
+  firebaseAuth.onAuthStateChanged(signInCallback);
 
   provide("firebase", firebaseApp);
   provide("auth", firebaseAuth);

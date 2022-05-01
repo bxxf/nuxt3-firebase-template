@@ -1,15 +1,20 @@
-import type { User } from "firebase/auth";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import type { IUser } from "../interfaces/IUser";
 
 export const useAuth = () => {
   const { $auth } = useNuxtApp();
-  const user = useState<User>("user", undefined);
+  const user = useState<IUser>("user", undefined);
 
   const signInWithGoogle = () => {
-      console.log("test")
     const provider = new GoogleAuthProvider();
     signInWithPopup($auth, provider).catch((e) => console.error(e));
   };
 
-  return { user, signInWithGoogle };
+  const signOut = () => {
+    $auth.signOut();
+    user.value = undefined;
+    useCookie("authToken").value = undefined;
+  }
+  
+  return { user, signInWithGoogle, signOut};
 };
