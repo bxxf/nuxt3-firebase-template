@@ -57,11 +57,9 @@ const fetchWithAuthorization = async (original, idToken) => {
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url)
 
-  const expectsHTML = event.request.headers.get('accept').includes('text/html')
-
   const isSameOrigin = self.location.origin === url.origin
   const isHttps = (self.location.protocol === 'https:' || self.location.hostname === 'localhost' || self.location.hostname === '127.0.0.1')
-  if (!expectsHTML || !isSameOrigin || !isHttps) {
+  if (!isSameOrigin || !isHttps) {
    return event.respondWith(fetch(event.request))
   }
   event.respondWith(
