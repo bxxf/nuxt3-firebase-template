@@ -46,7 +46,7 @@ const fetchWithAuthorization = async (original, idToken) => {
   const { url, ...props } = original.clone();
   const authorized = new Request(url, {
     ...props,
-    mode: "same-origin",
+    mode: "no-cors",
     redirect: "manual",
     headers,
   });

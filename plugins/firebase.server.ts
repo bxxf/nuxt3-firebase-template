@@ -1,20 +1,20 @@
 import admin from "firebase-admin";
 import "firebase/compat/auth";
 
-export default defineNuxtPlugin(() => {
+export default defineNuxtPlugin(({ssrContext}) => {
   admin.apps?.length === 0 &&
     admin.initializeApp({
       credential: admin.credential.cert(JSON.parse(process.env.SERVICE_ACCOUNT)),
     });
 
-  // get auth token from cookie on server
-  const token = useCookie("authToken");
-  if (!token.value) return;
+  // get auth token from headers
+  const token = ssrContext.req.headers["Authorization"];
+  if (!token) return;
 
   const { user } = useAuth();
   admin
     .auth()
-    .verifyIdToken(token.value)
+    .verifyIdToken(token)
     // get properties from decoded id token
     .then(({ email }) => (user.value = { email }));
 });
