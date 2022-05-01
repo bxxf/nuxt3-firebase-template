@@ -10,12 +10,15 @@ export default defineNuxtPlugin(({ provide }) => {
 
   // set user on client when available
   // @ts-ignore
-  firebaseAuth.onAuthStateChanged(signInCallback);
+  const authenticate = firebaseAuth.onAuthStateChanged((token) => {
+    signInCallback(token);
+    authenticate();
+  });
 
   provide("firebase", firebaseApp);
   provide("auth", firebaseAuth);
 
-  if ('serviceWorker' in window.navigator && nodeEnv !== 'development') {
-    window.navigator.serviceWorker.register('/sw.js')
+  if ("serviceWorker" in window.navigator && nodeEnv !== "development") {
+    window.navigator.serviceWorker.register("/sw.js");
   }
 });

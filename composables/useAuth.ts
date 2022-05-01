@@ -1,4 +1,5 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { signInCallback } from "~~/utils/signInCallback";
 import type { IUser } from "../interfaces/IUser";
 
 export const useAuth = () => {
@@ -7,7 +8,7 @@ export const useAuth = () => {
 
   const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup($auth, provider).catch((e) => console.error(e));
+    signInWithPopup($auth, provider).then(({user})=>signInCallback(user)).catch((e) => console.error(e));
   };
 
   const signOut = () => {
