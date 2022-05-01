@@ -1,13 +1,10 @@
 import admin from "firebase-admin";
 import "firebase/compat/auth";
 
-// import service account
-import service from "../service.json";
-
 export default defineNuxtPlugin(() => {
   admin.apps?.length === 0 &&
     admin.initializeApp({
-      credential: admin.credential.cert(service),
+      credential: admin.credential.cert(JSON.parse(process.env.SERVICE_ACCOUNT)),
     });
 
   // get auth token from cookie on server

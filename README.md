@@ -24,19 +24,12 @@ Replace environment variables specified in .env.example and copy file to .env
 ```
 FIREBASE_API_KEY= YOUR API KEY
 FIREBASE_AUTH_DOMAIN= YOUR AUTH DOMAIN
+SERVICE_ACCOUNT= JSON OF SERVICE ACCOUNT
 ```
 
 ## Setup service account
 
-Download service account from firebase console and save it as `service.json` in root. File should look like this:
-
-```json
-{
-  "projectId": "fire-nuxt-template",
-  "privateKey": "-----BEGIN PRIVATE xxx -----END PRIVATE KEY-----\n",
-  "clientEmail": "something.iam.gserviceaccount.com"
-}
-```
+Download service account from firebase console and put the json in .env file
 
 ## Development Server
 
