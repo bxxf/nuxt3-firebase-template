@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# Nuxt 3 Firebase Auth
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+Basic template for nuxt v3 with firebase authentication
 
 ## Setup
 
@@ -15,6 +15,27 @@ npm install
 
 # pnpm
 pnpm install --shamefully-hoist
+```
+
+## Setup environment variables
+
+Replace environment variables specified in .env.example and copy file to .env
+
+```
+FIREBASE_API_KEY= YOUR API KEY
+FIREBASE_AUTH_DOMAIN= YOUR AUTH DOMAIN
+```
+
+## Setup service account
+
+Download service account from firebase console and save it as `service.json` in root. File should look like this:
+
+```json
+{
+  "projectId": "fire-nuxt-template",
+  "privateKey": "-----BEGIN PRIVATE xxx -----END PRIVATE KEY-----\n",
+  "clientEmail": "something.iam.gserviceaccount.com"
+}
 ```
 
 ## Development Server
