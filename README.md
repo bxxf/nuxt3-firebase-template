@@ -1,6 +1,6 @@
 # Nuxt 3 Firebase Auth
 
-Basic template for nuxt v3 with firebase authentication
+Basic template for nuxt v3 with firebase authentication - with backend auth on service workers and cookie fallback. Service workers are only used on production to prevent bugs.
 
 ## Setup
 
