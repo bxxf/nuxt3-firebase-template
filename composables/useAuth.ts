@@ -14,7 +14,7 @@ export const useAuth = () => {
     $auth.signOut();
     user.value = undefined;
     useCookie("authToken").value = undefined;
-  }
-  
-  return { user, signInWithGoogle, signOut};
+  };
+
+  return { user, signInWithGoogle, signOut };
 };
