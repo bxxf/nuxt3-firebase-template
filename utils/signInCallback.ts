@@ -1,5 +1,10 @@
+export const signInCallback = (token) => {
+  const { email, accessToken } = token || {
+    email: undefined,
+    token: undefined,
+  };
+  if (!email || !accessToken) return;
 
-export const signInCallback = ({ email, accessToken }) => {
   const { user } = useAuth();
   user.value = { email };
 
