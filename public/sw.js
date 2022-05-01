@@ -23,6 +23,7 @@ const getIdToken = () => {
         // force token refresh as it might be used to sign in server side
         user.getIdToken(true).then(
           (idToken) => {
+            console.log("got token", idToken)
             resolve(idToken);
           },
           () => {
@@ -46,12 +47,12 @@ const fetchWithAuthorization = async (original, idToken) => {
   // Add ID token to header.
   headers.append("Authorization", "Bearer " + idToken);
 
+  console.log("token", idToken);
+
   // Create authorized request
   const { url, ...props } = original.clone();
   const authorized = new Request(url, {
     ...props,
-    mode: "no-cors",
-    redirect: "follow",
     headers,
   });
 
@@ -66,8 +67,8 @@ self.addEventListener("fetch", (event) => {
       idToken
         ? // if the token was retrieved we attempt an authorized fetch
           // if anything goes wrong we fall back to the original request
-          fetchWithAuthorization(event.request, idToken).catch(() =>
-            fetch(event.request)
+          fetchWithAuthorization(event.request, idToken).catch((e) =>
+            console.error(e)
           )
         : // otherwise we return a fetch of the original request directly
           fetch(event.request)
