@@ -3,7 +3,7 @@ import { getAuth } from "firebase/auth";
 import { signInCallback } from "../utils/signInCallback";
 
 export default defineNuxtPlugin(({ provide }) => {
-  const { firebaseConfig } = useRuntimeConfig();
+  const { firebaseConfig, nodeEnv } = useRuntimeConfig();
 
   const firebaseApp = getApps()[0] ?? initializeApp(firebaseConfig);
   const firebaseAuth = getAuth(firebaseApp);
@@ -15,7 +15,7 @@ export default defineNuxtPlugin(({ provide }) => {
   provide("firebase", firebaseApp);
   provide("auth", firebaseAuth);
 
-  if ('serviceWorker' in window.navigator && process.env.NODE_ENV !== 'development') {
+  if ('serviceWorker' in window.navigator && nodeEnv !== 'development') {
     window.navigator.serviceWorker.register('/sw.js')
   }
 });
