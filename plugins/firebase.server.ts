@@ -7,15 +7,16 @@ export default defineNuxtPlugin(({ssrContext}) => {
       credential: admin.credential.cert(JSON.parse(process.env.SERVICE_ACCOUNT)),
     });
 
-
     // get auth token from headers
-  const token = ssrContext.req.headers["authorization"]?.substring("Bearer ".length);
-  if (!token) return;
+  const tokenHeader = ssrContext.req.headers["authorization"]?.substring("Bearer ".length);
+  const tokenCookie = useCookie("authToken");
+
+  if (!tokenHeader && !tokenCookie.value) return;
 
   const { user } = useAuth();
   admin
     .auth()
-    .verifyIdToken(token)
+    .verifyIdToken(tokenHeader || tokenCookie.value)
     // get properties from decoded id token
     .then(({ email }) => (user.value = { email }));
 });
