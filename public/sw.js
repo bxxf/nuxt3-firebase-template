@@ -23,7 +23,6 @@ const getIdToken = () => {
         // force token refresh as it might be used to sign in server side
         user.getIdToken(true).then(
           (idToken) => {
-            console.log("got token", idToken)
             resolve(idToken);
           },
           () => {
@@ -46,8 +45,6 @@ const fetchWithAuthorization = async (original, idToken) => {
 
   // Add ID token to header.
   headers.append("Authorization", "Bearer " + idToken);
-
-  console.log("token", idToken);
 
   // Create authorized request
   const { url, ...props } = original.clone();
