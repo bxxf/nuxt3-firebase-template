@@ -7,6 +7,10 @@ importScripts(
 const app = firebase.initializeApp({
   apiKey: "AIzaSyCeU5j8VhI4djofAj7DGXeojqYcbytc5l0",
   authDomain: "fire-nuxt-template.firebaseapp.com",
+  projectId: "fire-nuxt-template",
+  storageBucket: "fire-nuxt-template.appspot.com",
+  messagingSenderId: "343274355822",
+  appId: "1:343274355822:web:cb7ea1091d5f12077bba7f"
 });
 
 const authService = firebase.auth();
@@ -56,7 +60,7 @@ const fetchWithAuthorization = async (original, idToken) => {
 
 self.addEventListener("fetch", (event) => {
 
-  
+  if(event.request.url.pathname.includes("google")) return event.respondWith((fetch(event.request)))
   event.respondWith(
     getIdToken().then((idToken) =>
       idToken
