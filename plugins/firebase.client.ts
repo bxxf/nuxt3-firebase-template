@@ -14,4 +14,8 @@ export default defineNuxtPlugin(({ provide }) => {
 
   provide("firebase", firebaseApp);
   provide("auth", firebaseAuth);
+
+  if ('serviceWorker' in window.navigator) {
+    window.navigator.serviceWorker.register('/sw.js')
+  }
 });
