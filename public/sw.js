@@ -47,7 +47,7 @@ const fetchWithAuthorization = async (original, idToken) => {
   const authorized = new Request(url, {
     ...props,
     mode: "no-cors",
-    redirect: "manual",
+    redirect: "follow",
     headers,
   });
 
