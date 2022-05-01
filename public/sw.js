@@ -8,8 +8,8 @@ importScripts(
 const { firebaseConfig } = useRuntimeConfig();
 
 const app = firebase.initializeApp({
-  apiKey: firebaseConfig.firebaseApiKey,
-  authDomain: firebaseConfig.authDomain,
+  apiKey: "AIzaSyCeU5j8VhI4djofAj7DGXeojqYcbytc5l0",
+  authDomain: "fire-nuxt-template.firebaseapp.com",
 });
 
 const authService = firebase.auth();

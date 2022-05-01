@@ -21,15 +21,29 @@ pnpm install --shamefully-hoist
 
 Replace environment variables specified in .env.example and copy file to .env
 
-```
+```js
+//.env
 FIREBASE_API_KEY= YOUR API KEY
 FIREBASE_AUTH_DOMAIN= YOUR AUTH DOMAIN
-SERVICE_ACCOUNT= JSON OF SERVICE ACCOUNT
+SERVICE_ACCOUNT= YOUR SERVICE ACCOUNT (stringified json)
 ```
 
 ## Setup service account
 
 Download service account from firebase console and put the json in .env file
+
+## Replace firebase config in service worker
+
+Replace config to yours at /public/sw.js
+
+```js
+// /public/sw.js
+
+const app = firebase.initializeApp({
+  apiKey: YOUR API KEY,
+  authDomain: YOUR AUTH DOMAIN
+});
+```
 
 ## Development Server
 
