@@ -60,7 +60,7 @@ const fetchWithAuthorization = async (original, idToken) => {
 
 self.addEventListener("fetch", (event) => {
 
-  if(event.request.url.pathname.includes("google")) return event.respondWith((fetch(event.request)))
+  if(event.request.url.includes("google")) return event.respondWith((fetch(event.request)))
   event.respondWith(
     getIdToken().then((idToken) =>
       idToken
